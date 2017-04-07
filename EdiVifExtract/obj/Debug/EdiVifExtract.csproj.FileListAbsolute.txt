@@ -1,0 +1,11 @@
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csprojResolveAssemblyReference.cache
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.Properties.Resources.resources
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csproj.GenerateResource.Cache
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.exe.config
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.exe
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.pdb
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.FormExtract.resources
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.exe
+c:\users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.pdb
+C:\Users\jc\Documents\Visual Studio 2017\Projects\EdiVifExtract\EdiVifExtract\bin\Debug\EdiFabric.Framework.dll
+C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\bin\Debug\ExtendedXmlSerializer.dll
