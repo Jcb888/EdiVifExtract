@@ -160,7 +160,12 @@ namespace EdiVifExtract
                 co.DicdepotDirectory = this.DicdepotDirectory;
                 ExtendedXmlSerializer xs = new ExtendedXmlSerializer();
 
-                var xml = xs.Serialize(co);
+                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
+                {
+
+                    xml = xs.Serialize(co);
+                    wr.WriteLine(xml);
+                };
 
             }
             catch (Exception e)
@@ -213,7 +218,8 @@ namespace EdiVifExtract
                 {
                     KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count)+1).ToString(), comboBoxDepot.Text);
                     DicdepotDirectory.Add(kvp.Key,kvp.Value);
-                    comboBoxDepot.Refresh();
+                    comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
+                    comboBoxDepot.SelectedIndex = comboBoxDepot.FindStringExact(kvp.Value);
                 }
             }
         
