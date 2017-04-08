@@ -22,22 +22,17 @@ namespace EdiVifExtract
         string appdata = "";//son ss rep.
         String xml;
 
-        static List<FileInfo> listeFichiers = new List<FileInfo>();
+        //static List<FileInfo> listeFichiers = new List<FileInfo>();
+
 
         Dictionary<string, string> DicdepotDirectory = new Dictionary<string,string>();
         Dictionary<string, string> DicSourceDirectory = new Dictionary<string, string>();
         Dictionary<string, string> DicdestinationDirectory = new Dictionary<string, string>();
+        //class pour serialiser les params à mémoriser
         static configObject co = new configObject();
 
         public FormExtract()
         {
-            DicSourceDirectory.Add("1", @"c:\temp\");
-            DicSourceDirectory.Add("2", @"d:\temp\");
-            DicSourceDirectory.Add("3", @"e:\temp\");
-            DicdestinationDirectory.Add("1", @"c:\1");
-            DicdestinationDirectory.Add("2", @"c:\2");
-            DicdestinationDirectory.Add("3", @"c:\3");
-            DicdepotDirectory.Add("1", @"c:\1");
 
             co.DicSourceDirectory = DicSourceDirectory;
             co.DicdestinationDirectory = DicdestinationDirectory;
@@ -55,7 +50,10 @@ namespace EdiVifExtract
             ExtendedXmlSerializer xs = new ExtendedXmlSerializer();//pour serialiser en XML la config (sauvegarde des paths src et dst)
             if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
-
+                co.DicSourceDirectory.Add("1", @"c:\temp\");
+                co.DicdestinationDirectory.Add("1", @"c:\1");
+                co.DicdepotDirectory.Add("1", @"\\192.168.181.58\ascii\edi\cde");
+                
                 using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
                 {
                   
@@ -101,15 +99,27 @@ namespace EdiVifExtract
         private void buttonGenerer_Click(object sender, EventArgs e)
         {
 
-            string[] OriginaleLines = System.IO.File.ReadAllLines(@"c:\temp\10474434.asc");
+            // recup de la liste des fichier .asc du repertoire de la combobox 
+            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, "*.asc");
+
+            for (int i = 0; i < tabFiles.Length; i++)
+            {
+                traiterFichierEnCours(tabFiles[i]);
+            }
+            
+            string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
+            MessageBox.Show(value);
+        }
+
+        private void traiterFichierEnCours(String fichierASC)
+        {
+            string[] OriginaleLines = System.IO.File.ReadAllLines(fichierASC);
             string[] modifiedLines = new string[OriginaleLines.Length];
             string[] StrSplit = OriginaleLines[0].Split('"');
             String numEDI = StrSplit[5];// on recupere le n° EDI
-            numEDI = numEDI.Trim(new Char[] { ' ', '"'});//suppression des "decoration" du n° EDI
+            numEDI = numEDI.Trim(new Char[] { ' ', '"' });//suppression des "decoration" du n° EDI
             string ediDir = Path.Combine(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, numEDI);//path + num EDI == new path
             Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
-
-            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value,"*.asc");
 
             int i = 0;
             foreach (string line in OriginaleLines)
@@ -120,7 +130,7 @@ namespace EdiVifExtract
 
 
             //le fichier des entetes
-            System.IO.File.WriteAllText(Path.Combine(ediDir,"cde_ent.asc"), modifiedLines[0].ToString());
+            System.IO.File.WriteAllText(Path.Combine(ediDir, "cde_ent.asc"), modifiedLines[0].ToString());
 
             String destFile = Path.Combine(ediDir, "cde_lig.asc");
             if (File.Exists(destFile)) { File.Delete(destFile); }
@@ -135,12 +145,7 @@ namespace EdiVifExtract
                 fs.Close();
                 fs.Dispose();
             }
-
-                string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
-            MessageBox.Show(value);
-
         }
-
 
 
         public void creatXML()
