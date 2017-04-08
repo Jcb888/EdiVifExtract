@@ -104,11 +104,12 @@ namespace EdiVifExtract
             string[] OriginaleLines = System.IO.File.ReadAllLines(@"c:\temp\10474434.asc");
             string[] modifiedLines = new string[OriginaleLines.Length];
             string[] StrSplit = OriginaleLines[0].Split('"');
-            String numEDI = StrSplit[5];
-            numEDI = numEDI.Trim(new Char[] { ' ', '"'});
-            string ediDir = Path.Combine(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, numEDI);
-            Directory.CreateDirectory(ediDir);
+            String numEDI = StrSplit[5];// on recupere le n° EDI
+            numEDI = numEDI.Trim(new Char[] { ' ', '"'});//suppression des "decoration" du n° EDI
+            string ediDir = Path.Combine(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, numEDI);//path + num EDI == new path
+            Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
 
+            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value,"*.asc");
 
             int i = 0;
             foreach (string line in OriginaleLines)
