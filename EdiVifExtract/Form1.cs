@@ -27,7 +27,7 @@ namespace EdiVifExtract
 
         Dictionary<string, string> DicdepotDirectory = new Dictionary<string,string>();
         Dictionary<string, string> DicSourceDirectory = new Dictionary<string, string>();
-        Dictionary<string, string> DicdestinationDirectory = new Dictionary<string, string>();
+        //Dictionary<string, string> DicdestinationDirectory = new Dictionary<string, string>();
         //class pour serialiser les params à mémoriser
         static configObject co = new configObject();
 
@@ -35,7 +35,7 @@ namespace EdiVifExtract
         {
 
             co.DicSourceDirectory = DicSourceDirectory;
-            co.DicdestinationDirectory = DicdestinationDirectory;
+            //co.DicdestinationDirectory = DicdestinationDirectory;
             co.DicdepotDirectory = DicdepotDirectory;
 
             InitializeComponent();
@@ -51,9 +51,11 @@ namespace EdiVifExtract
             if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
                 co.DicSourceDirectory.Add("1", @"c:\temp\");
-                co.DicdestinationDirectory.Add("1", @"c:\1");
-                co.DicdepotDirectory.Add("1", @"\\192.168.181.58\ascii\edi\cde");
+                //co.DicdestinationDirectory.Add("1", @"c:\1");
+                co.DicdepotDirectory.Add("1", @"\\srvvifprod1\ascii\edi\cde");
+                co.DicdepotDirectory.Add("2", @"\\192.168.181.58\ascii\edi\cde");
                 
+
                 using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
                 {
                   
@@ -69,7 +71,7 @@ namespace EdiVifExtract
 
                 xml = rd.ReadToEnd();
                 co = xs.Deserialize<configObject>(xml);// as configObject;
-                this.DicdestinationDirectory = co.DicdestinationDirectory;
+                //this.DicdestinationDirectory = co.DicdestinationDirectory;
                 this.DicSourceDirectory = co.DicSourceDirectory;
                 this.DicdepotDirectory = co.DicdepotDirectory;
                
@@ -85,9 +87,9 @@ namespace EdiVifExtract
             comboBoxSource.DisplayMember = "Value";
             comboBoxSource.ValueMember = "Key";
             //-----------------------------------------
-            comboBoxDestination.DataSource = new BindingSource(DicdestinationDirectory, null);
-            comboBoxDestination.DisplayMember = "Value";
-            comboBoxDestination.ValueMember = "key";
+            //comboBoxDestination.DataSource = new BindingSource(DicdestinationDirectory, null);
+            //comboBoxDestination.DisplayMember = "Value";
+            //comboBoxDestination.ValueMember = "key";
             //-------------------------------------------
             comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
             comboBoxDepot.DisplayMember = "Value";
@@ -140,7 +142,7 @@ namespace EdiVifExtract
                 System.IO.File.AppendAllText(destFile, modifiedLines[j].ToString());
             }
 
-            using (System.IO.FileStream fs = System.IO.File.Create(Path.Combine(ediDir, "tpcde")))
+            using (System.IO.FileStream fs = System.IO.File.Create(Path.Combine(ediDir, "topcde")))
             {
                 fs.Close();
                 fs.Dispose();
@@ -153,7 +155,7 @@ namespace EdiVifExtract
 
             try
             {
-                co.DicdestinationDirectory = this.DicdestinationDirectory;
+                //co.DicdestinationDirectory = this.DicdestinationDirectory;
                 co.DicSourceDirectory = this.DicSourceDirectory;
                 co.DicdepotDirectory = this.DicdepotDirectory;
                 ExtendedXmlSerializer xs = new ExtendedXmlSerializer();
@@ -173,6 +175,61 @@ namespace EdiVifExtract
         {
             creatXML();
         }
+
+        private void comboBoxDepot_TextChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(" comboBoxDepot_TextChanged " + e.ToString());
+        }
+
+        private void comboBoxDepot_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("comboBoxDepot_SelectedValueChanged" + e.ToString());
+        }
+
+        private void buttonOuvrirDest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", comboBoxDepot.Text );
+            }
+            catch (Exception e2)
+            {
+
+                MessageBox.Show(e2.StackTrace);
+            }
+           
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("@ Jean-Christophe BILLARD - 2017");
+        }
+
+        private void comboBoxDepot_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(comboBoxDepot.Text, StringComparison.CurrentCultureIgnoreCase));
+                if (!b)
+                {
+                    KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count)+1).ToString(), comboBoxDepot.Text);
+                    DicdepotDirectory.Add(kvp.Key,kvp.Value);
+                    comboBoxDepot.Refresh();
+                }
+            }
+        
+        }
+
+        //private void comboBoxDepot_Leave(object sender, EventArgs e)
+        //{
+        //    //// this.DicdepotDirectory.
+        //    //bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(((KeyValuePair<string, string>)comboBoxDepot.SelectedItem).Value, StringComparison.CurrentCultureIgnoreCase));
+        //    //MessageBox.Show(b.ToString());
+        //}
+
+        //private void comboBoxDepot_Validating(object sender, CancelEventArgs e)
+        //{
+        //    //MessageBox.Show("comboBoxDepot_Validating");
+        //}
     }
 
     public class configObject
@@ -187,23 +244,23 @@ namespace EdiVifExtract
         }
 
         public Dictionary<string, string> DicSourceDirectory;
-        public Dictionary<string, string> DicdestinationDirectory;
+        //public Dictionary<string, string> DicdestinationDirectory;
         public Dictionary<string, string> DicdepotDirectory;
     }
 
-    public class MyObject
-    {
-        public MyObject()
-        {
+    //public class MyObject
+    //{
+    //    public MyObject()
+    //    {
 
-            //DicdestinationDirectory = new Dictionary<string, string>();//
-            //DicSourceDirectory = new Dictionary<string, string>();
-            //DicdepotDirectory = new Dictionary<string, string>();
+    //        //DicdestinationDirectory = new Dictionary<string, string>();//
+    //        //DicSourceDirectory = new Dictionary<string, string>();
+    //        //DicdepotDirectory = new Dictionary<string, string>();
 
-        }
+    //    }
 
-        private int Myint;
+    //    private int Myint;
 
-        public int Myint1 { get => Myint; set => Myint = value; }
-    }
+    //    public int Myint1 { get => Myint; set => Myint = value; }
+    //}
 }
