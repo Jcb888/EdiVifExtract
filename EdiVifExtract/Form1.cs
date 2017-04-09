@@ -86,11 +86,6 @@ namespace EdiVifExtract
             comboBoxSource.DataSource = new BindingSource(DicSourceDirectory, null);
             comboBoxSource.DisplayMember = "Value";
             comboBoxSource.ValueMember = "Key";
-            //-----------------------------------------
-            //comboBoxDestination.DataSource = new BindingSource(DicdestinationDirectory, null);
-            //comboBoxDestination.DisplayMember = "Value";
-            //comboBoxDestination.ValueMember = "key";
-            //-------------------------------------------
             comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
             comboBoxDepot.DisplayMember = "Value";
             comboBoxDepot.ValueMember = "key";
@@ -100,7 +95,11 @@ namespace EdiVifExtract
 
         private void buttonGenerer_Click(object sender, EventArgs e)
         {
-
+            if (!Directory.Exists(comboBoxSource.Text))
+            {
+              MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxSource.Text);
+              return;
+            }
             // recup de la liste des fichier .asc du repertoire de la combobox 
             string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, "*.asc");
 
@@ -181,18 +180,15 @@ namespace EdiVifExtract
             creatXML();
         }
 
-        private void comboBoxDepot_TextChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show(" comboBoxDepot_TextChanged " + e.ToString());
-        }
-
-        private void comboBoxDepot_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show("comboBoxDepot_SelectedValueChanged" + e.ToString());
-        }
 
         private void buttonOuvrirDest_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(comboBoxDepot.Text))
+            {
+                MessageBox.Show("Ce repertoire source est introuvable : " + comboBoxDepot.Text);
+                return;
+            }
+
             try
             {
                 System.Diagnostics.Process.Start("explorer.exe", comboBoxDepot.Text );
@@ -207,35 +203,93 @@ namespace EdiVifExtract
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("@ Jean-Christophe BILLARD - 2017");
+            MessageBox.Show("@ Jean-Christophe BILLARD - 2017 "+"\n"+"     Version 0.1");
         }
 
         private void comboBoxDepot_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
-                bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(comboBoxDepot.Text, StringComparison.CurrentCultureIgnoreCase));
-                if (!b)
-                {
-                    KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count)+1).ToString(), comboBoxDepot.Text);
-                    DicdepotDirectory.Add(kvp.Key,kvp.Value);
-                    comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
-                    comboBoxDepot.SelectedIndex = comboBoxDepot.FindStringExact(kvp.Value);
-                }
+            if (e.KeyCode == Keys.Enter)
+            {
+                ajouterdepotlistCombo();
             }
-        
+
         }
 
-        //private void comboBoxDepot_Leave(object sender, EventArgs e)
-        //{
-        //    //// this.DicdepotDirectory.
-        //    //bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(((KeyValuePair<string, string>)comboBoxDepot.SelectedItem).Value, StringComparison.CurrentCultureIgnoreCase));
-        //    //MessageBox.Show(b.ToString());
-        //}
+        private void ajouterdepotlistCombo()
+        {
 
-        //private void comboBoxDepot_Validating(object sender, CancelEventArgs e)
-        //{
-        //    //MessageBox.Show("comboBoxDepot_Validating");
-        //}
+            if (!Directory.Exists(comboBoxDepot.Text))
+            {
+                MessageBox.Show("Ce repertoire est introuvable : " + comboBoxDepot.Text);
+                return;
+            }
+
+            bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(comboBoxDepot.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                DicdepotDirectory.Add(kvp.Key, kvp.Value);
+                comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
+                comboBoxDepot.SelectedIndex = comboBoxDepot.FindStringExact(kvp.Value);
+            }
+        }
+
+        /// <summary>
+        /// ajoute le texte du combo à sa liste
+        /// </summary>
+        private void ajouterSourcelistCombo()
+        {
+            if (!Directory.Exists(comboBoxSource.Text))
+            {
+                MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxSource.Text);
+                return;
+            }
+            //deja dans la liste ?
+            bool b = DicSourceDirectory.Any(tr => tr.Value.Equals(comboBoxSource.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)//si non on le rajoute
+            {
+                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicSourceDirectory.Count) + 1).ToString(), comboBoxSource.Text);
+                DicSourceDirectory.Add(kvp.Key, kvp.Value);
+                comboBoxSource.DataSource = new BindingSource(DicSourceDirectory, null);
+                comboBoxSource.SelectedIndex = comboBoxSource.FindStringExact(kvp.Value);
+            }
+        }
+
+        private void buttonSelectSource_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            DialogResult result = fbd.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                comboBoxSource.Text = fbd.SelectedPath.ToString();
+            }
+
+            ajouterSourcelistCombo();
+        }
+
+        private void buttonSelectDepot_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            DialogResult result = fbd.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                comboBoxDepot.Text = fbd.SelectedPath.ToString();
+            }
+
+            ajouterdepotlistCombo();
+        }
+
+        private void comboBoxSource_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ajouterSourcelistCombo();
+            }
+        }
     }
 
     public class configObject
@@ -254,19 +308,4 @@ namespace EdiVifExtract
         public Dictionary<string, string> DicdepotDirectory;
     }
 
-    //public class MyObject
-    //{
-    //    public MyObject()
-    //    {
-
-    //        //DicdestinationDirectory = new Dictionary<string, string>();//
-    //        //DicSourceDirectory = new Dictionary<string, string>();
-    //        //DicdepotDirectory = new Dictionary<string, string>();
-
-    //    }
-
-    //    private int Myint;
-
-    //    public int Myint1 { get => Myint; set => Myint = value; }
-    //}
 }

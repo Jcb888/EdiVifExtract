@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormExtract));
             this.buttonGenerer = new System.Windows.Forms.Button();
             this.comboBoxSource = new System.Windows.Forms.ComboBox();
             this.comboBoxDepot = new System.Windows.Forms.ComboBox();
             this.buttonOuvrirDest = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSelectSource = new System.Windows.Forms.Button();
+            this.buttonSelectDepot = new System.Windows.Forms.Button();
+            this.labelrepTravail = new System.Windows.Forms.Label();
+            this.labelDepot = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +61,7 @@
             this.comboBoxSource.Name = "comboBoxSource";
             this.comboBoxSource.Size = new System.Drawing.Size(270, 21);
             this.comboBoxSource.TabIndex = 1;
+            this.comboBoxSource.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxSource_KeyDown);
             // 
             // comboBoxDepot
             // 
@@ -65,8 +71,6 @@
             this.comboBoxDepot.Name = "comboBoxDepot";
             this.comboBoxDepot.Size = new System.Drawing.Size(270, 21);
             this.comboBoxDepot.TabIndex = 3;
-            this.comboBoxDepot.SelectedValueChanged += new System.EventHandler(this.comboBoxDepot_SelectedValueChanged);
-            this.comboBoxDepot.TextChanged += new System.EventHandler(this.comboBoxDepot_TextChanged);
             this.comboBoxDepot.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxDepot_KeyDown);
             // 
             // buttonOuvrirDest
@@ -85,22 +89,67 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(325, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(338, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(24, 20);
+            this.aboutToolStripMenuItem.Text = "?";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // buttonSelectSource
+            // 
+            this.buttonSelectSource.Location = new System.Drawing.Point(296, 35);
+            this.buttonSelectSource.Name = "buttonSelectSource";
+            this.buttonSelectSource.Size = new System.Drawing.Size(30, 23);
+            this.buttonSelectSource.TabIndex = 7;
+            this.buttonSelectSource.Tag = resources.GetString("buttonSelectSource.Tag");
+            this.buttonSelectSource.Text = "...";
+            this.buttonSelectSource.UseVisualStyleBackColor = true;
+            this.buttonSelectSource.Click += new System.EventHandler(this.buttonSelectSource_Click);
+            // 
+            // buttonSelectDepot
+            // 
+            this.buttonSelectDepot.Location = new System.Drawing.Point(296, 86);
+            this.buttonSelectDepot.Name = "buttonSelectDepot";
+            this.buttonSelectDepot.Size = new System.Drawing.Size(30, 23);
+            this.buttonSelectDepot.TabIndex = 8;
+            this.buttonSelectDepot.Tag = resources.GetString("buttonSelectDepot.Tag");
+            this.buttonSelectDepot.Text = "...";
+            this.buttonSelectDepot.UseVisualStyleBackColor = true;
+            this.buttonSelectDepot.Click += new System.EventHandler(this.buttonSelectDepot_Click);
+            // 
+            // labelrepTravail
+            // 
+            this.labelrepTravail.AutoSize = true;
+            this.labelrepTravail.Location = new System.Drawing.Point(19, 11);
+            this.labelrepTravail.Name = "labelrepTravail";
+            this.labelrepTravail.Size = new System.Drawing.Size(102, 13);
+            this.labelrepTravail.TabIndex = 9;
+            this.labelrepTravail.Text = "Répertoire de travail";
+            // 
+            // labelDepot
+            // 
+            this.labelDepot.AutoSize = true;
+            this.labelDepot.Location = new System.Drawing.Point(19, 70);
+            this.labelDepot.Name = "labelDepot";
+            this.labelDepot.Size = new System.Drawing.Size(146, 13);
+            this.labelDepot.TabIndex = 10;
+            this.labelDepot.Text = "Répertoire destination (dépot)";
             // 
             // FormExtract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 190);
+            this.ClientSize = new System.Drawing.Size(338, 190);
+            this.Controls.Add(this.labelDepot);
+            this.Controls.Add(this.labelrepTravail);
+            this.Controls.Add(this.buttonSelectDepot);
+            this.Controls.Add(this.buttonSelectSource);
             this.Controls.Add(this.buttonOuvrirDest);
             this.Controls.Add(this.comboBoxDepot);
             this.Controls.Add(this.comboBoxSource);
@@ -127,6 +176,10 @@
         private System.Windows.Forms.Button buttonOuvrirDest;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button buttonSelectSource;
+        private System.Windows.Forms.Button buttonSelectDepot;
+        private System.Windows.Forms.Label labelrepTravail;
+        private System.Windows.Forms.Label labelDepot;
     }
 }
 
