@@ -52,7 +52,7 @@ namespace EdiVifExtract
             {
                 co.DicSourceDirectory.Add("1", @"c:\temp\");
                 //co.DicdestinationDirectory.Add("1", @"c:\1");
-                co.DicdepotDirectory.Add("1", @"\\srvvifprod1\ascii\edi\cde");
+                co.DicdepotDirectory.Add("1", @"\\192.168.181.55\ascii\edi\cde");
                 co.DicdepotDirectory.Add("2", @"\\192.168.181.58\ascii\edi\cde");
                 
 
@@ -108,8 +108,8 @@ namespace EdiVifExtract
                 traiterFichierEnCours(tabFiles[i]);
             }
             
-            string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
-            MessageBox.Show(value);
+            //string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
+            ////MessageBox.Show(value);
         }
 
         private void traiterFichierEnCours(String fichierASC)
@@ -145,6 +145,16 @@ namespace EdiVifExtract
             {
                 fs.Close();
                 fs.Dispose();
+            }
+
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", comboBoxSource.Text);
+            }
+            catch (Exception e2)
+            {
+
+                MessageBox.Show(e2.StackTrace);
             }
         }
 
