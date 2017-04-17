@@ -102,7 +102,13 @@ namespace EdiVifExtract
               return;
             }
             // recup de la liste des fichier .asc du repertoire de la combobox 
-            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, "*.asc");
+            string[] tabFiles = Directory.GetFileSystemEntries(comboBoxSource.Text, "*.asc");
+
+            if(tabFiles.Length < 1)
+            {
+                MessageBox.Show("Aucun fichier asc trouvé dans : " + comboBoxSource.Text);
+                return;
+            }
 
             for (int i = 0; i < tabFiles.Length; i++)
             {
@@ -120,7 +126,7 @@ namespace EdiVifExtract
             string[] StrSplit = OriginaleLines[0].Split('"');
             String numEDI = StrSplit[5];// on recupere le n° EDI
             numEDI = numEDI.Trim(new Char[] { ' ', '"' });//suppression des "decoration" du n° EDI
-            string ediDir = Path.Combine(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, numEDI);//path + num EDI == new path
+            string ediDir = Path.Combine(comboBoxSource.Text, numEDI);//path + num EDI == new path
             Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
 
             int i = 0;
