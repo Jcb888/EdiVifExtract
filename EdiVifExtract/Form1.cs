@@ -53,10 +53,11 @@ namespace EdiVifExtract
             if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
                 co.ListSourceDirectory.Add(new comboItem("1",@"c:\temp"));
-                //co.DicdestinationDirectory.Add("1", @"c:\1");
+                co.strSourceSelectionne = @"c:\temp";
                 co.listDepotDirectory.Add(new comboItem("1", @"\\192.168.181.55\ascii\edi\cde"));
                 co.listDepotDirectory.Add(new comboItem("2", @"\\192.168.181.58\ascii\edi\cde"));
-                
+                co.strDepotSelectionne = @"\\192.168.181.58\ascii\edi\cde";
+
                 if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
                 {
                     
@@ -197,11 +198,11 @@ namespace EdiVifExtract
 
         private void FormExtract_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Directory.Exists(comboBoxDepot.Text))
-                co.strDepotSelectionne = comboBoxDepot.Text;
+            //if (Directory.Exists(comboBoxDepot.Text))
+            //    co.strDepotSelectionne = comboBoxDepot.Text;
 
-            if (Directory.Exists(comboBoxSource.Text))
-                co.strSourceSelectionne = comboBoxSource.Text;
+            //if (Directory.Exists(comboBoxSource.Text))
+            //    co.strSourceSelectionne = comboBoxSource.Text;
 
             creatXML();
         }

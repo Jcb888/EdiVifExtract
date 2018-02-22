@@ -40,12 +40,20 @@
             this.labelrepTravail = new System.Windows.Forms.Label();
             this.labelDepot = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxChangerDate = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.labelFormatDate = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonGenerer
             // 
-            this.buttonGenerer.Location = new System.Drawing.Point(20, 142);
+            this.buttonGenerer.Location = new System.Drawing.Point(19, 272);
             this.buttonGenerer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonGenerer.Name = "buttonGenerer";
             this.buttonGenerer.Size = new System.Drawing.Size(86, 23);
@@ -76,7 +84,7 @@
             // 
             // buttonOuvrirDest
             // 
-            this.buttonOuvrirDest.Location = new System.Drawing.Point(186, 140);
+            this.buttonOuvrirDest.Location = new System.Drawing.Point(172, 272);
             this.buttonOuvrirDest.Name = "buttonOuvrirDest";
             this.buttonOuvrirDest.Size = new System.Drawing.Size(104, 25);
             this.buttonOuvrirDest.TabIndex = 5;
@@ -152,11 +160,86 @@
             this.label1.TabIndex = 11;
             this.label1.Text = ".55 => prod / .58 => test";
             // 
+            // checkBoxChangerDate
+            // 
+            this.checkBoxChangerDate.AutoSize = true;
+            this.checkBoxChangerDate.Location = new System.Drawing.Point(20, 135);
+            this.checkBoxChangerDate.Name = "checkBoxChangerDate";
+            this.checkBoxChangerDate.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxChangerDate.TabIndex = 12;
+            this.checkBoxChangerDate.Text = "Changer les dates";
+            this.checkBoxChangerDate.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(39, 159);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 13;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(39, 211);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 14;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(39, 185);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 15;
+            // 
+            // labelFormatDate
+            // 
+            this.labelFormatDate.AutoSize = true;
+            this.labelFormatDate.Location = new System.Drawing.Point(42, 243);
+            this.labelFormatDate.Name = "labelFormatDate";
+            this.labelFormatDate.Size = new System.Drawing.Size(63, 13);
+            this.labelFormatDate.TabIndex = 16;
+            this.labelFormatDate.Text = "AAAAMMJJ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(145, 162);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(145, 188);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(145, 211);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "label4";
+            // 
             // FormExtract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 190);
+            this.ClientSize = new System.Drawing.Size(338, 314);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelFormatDate);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.checkBoxChangerDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDepot);
             this.Controls.Add(this.labelrepTravail);
@@ -194,6 +277,14 @@
         private System.Windows.Forms.Label labelrepTravail;
         private System.Windows.Forms.Label labelDepot;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxChangerDate;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label labelFormatDate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
