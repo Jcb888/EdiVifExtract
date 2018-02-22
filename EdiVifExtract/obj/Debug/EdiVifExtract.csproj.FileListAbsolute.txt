@@ -9,3 +9,14 @@ C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\ob
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.exe
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.pdb
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csprojResolveAssemblyReference.cache
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.exe.config
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.exe
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Debug\EdiVifExtract.pdb
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Debug\EdiFabric.Framework.dll
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Debug\ExtendedXmlSerializer.dll
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.FormExtract.resources
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.Properties.Resources.resources
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csproj.GenerateResource.Cache
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csproj.CoreCompileInputs.cache
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.exe
+C:\Users\billard\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.pdb

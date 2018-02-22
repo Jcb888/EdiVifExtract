@@ -41,13 +41,13 @@
             this.labelDepot = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxChangerDate = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxDateLivraison = new System.Windows.Forms.TextBox();
+            this.textBoxDateEmission = new System.Windows.Forms.TextBox();
+            this.textBoxDateReception = new System.Windows.Forms.TextBox();
             this.labelFormatDate = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelDatelivraison = new System.Windows.Forms.Label();
+            this.labelDateReception = new System.Windows.Forms.Label();
+            this.labelDateEmission = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -170,26 +170,27 @@
             this.checkBoxChangerDate.Text = "Changer les dates";
             this.checkBoxChangerDate.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBoxDateLivraison
             // 
-            this.textBox1.Location = new System.Drawing.Point(39, 159);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 13;
+            this.textBoxDateLivraison.Location = new System.Drawing.Point(39, 159);
+            this.textBoxDateLivraison.Name = "textBoxDateLivraison";
+            this.textBoxDateLivraison.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDateLivraison.TabIndex = 13;
+            this.textBoxDateLivraison.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // textBoxDateEmission
             // 
-            this.textBox2.Location = new System.Drawing.Point(39, 211);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 14;
+            this.textBoxDateEmission.Location = new System.Drawing.Point(39, 211);
+            this.textBoxDateEmission.Name = "textBoxDateEmission";
+            this.textBoxDateEmission.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDateEmission.TabIndex = 14;
             // 
-            // textBox3
+            // textBoxDateReception
             // 
-            this.textBox3.Location = new System.Drawing.Point(39, 185);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 15;
+            this.textBoxDateReception.Location = new System.Drawing.Point(39, 185);
+            this.textBoxDateReception.Name = "textBoxDateReception";
+            this.textBoxDateReception.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDateReception.TabIndex = 15;
             // 
             // labelFormatDate
             // 
@@ -200,45 +201,45 @@
             this.labelFormatDate.TabIndex = 16;
             this.labelFormatDate.Text = "AAAAMMJJ";
             // 
-            // label2
+            // labelDatelivraison
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(145, 162);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "label2";
+            this.labelDatelivraison.AutoSize = true;
+            this.labelDatelivraison.Location = new System.Drawing.Point(145, 162);
+            this.labelDatelivraison.Name = "labelDatelivraison";
+            this.labelDatelivraison.Size = new System.Drawing.Size(75, 13);
+            this.labelDatelivraison.TabIndex = 17;
+            this.labelDatelivraison.Text = "Date Livraison";
             // 
-            // label3
+            // labelDateReception
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(145, 188);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "label3";
+            this.labelDateReception.AutoSize = true;
+            this.labelDateReception.Location = new System.Drawing.Point(145, 188);
+            this.labelDateReception.Name = "labelDateReception";
+            this.labelDateReception.Size = new System.Drawing.Size(82, 13);
+            this.labelDateReception.TabIndex = 18;
+            this.labelDateReception.Text = "Date Reception";
             // 
-            // label4
+            // labelDateEmission
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(145, 211);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "label4";
+            this.labelDateEmission.AutoSize = true;
+            this.labelDateEmission.Location = new System.Drawing.Point(145, 211);
+            this.labelDateEmission.Name = "labelDateEmission";
+            this.labelDateEmission.Size = new System.Drawing.Size(77, 13);
+            this.labelDateEmission.TabIndex = 19;
+            this.labelDateEmission.Text = "Date Emission ";
             // 
             // FormExtract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 314);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelDateEmission);
+            this.Controls.Add(this.labelDateReception);
+            this.Controls.Add(this.labelDatelivraison);
             this.Controls.Add(this.labelFormatDate);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDateReception);
+            this.Controls.Add(this.textBoxDateEmission);
+            this.Controls.Add(this.textBoxDateLivraison);
             this.Controls.Add(this.checkBoxChangerDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDepot);
@@ -278,13 +279,13 @@
         private System.Windows.Forms.Label labelDepot;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxChangerDate;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxDateLivraison;
+        private System.Windows.Forms.TextBox textBoxDateEmission;
+        private System.Windows.Forms.TextBox textBoxDateReception;
         private System.Windows.Forms.Label labelFormatDate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelDatelivraison;
+        private System.Windows.Forms.Label labelDateReception;
+        private System.Windows.Forms.Label labelDateEmission;
     }
 }
 

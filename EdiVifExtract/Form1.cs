@@ -126,6 +126,22 @@ namespace EdiVifExtract
             string[] modifiedLines = new string[OriginaleLines.Length];
             string[] StrSplit = OriginaleLines[0].Split('"');
             String numEDI = StrSplit[5];// on recupere le n° EDI
+            if (this.checkBoxChangerDate.Checked)
+            {
+                StrSplit[19] = this.textBoxDateEmission.Text; //dateEmission
+                StrSplit[21] = this.textBoxDateReception.Text;//dateReception
+                StrSplit[23] = this.textBoxDateLivraison.Text;//dateLivraison
+
+                String newlineEntete = "";
+                foreach (String item in StrSplit)
+                {
+                    newlineEntete = newlineEntete + '"' + " " + item;
+                }
+
+
+            }
+
+
             numEDI = numEDI.Trim(new Char[] { ' ', '"' });//suppression des "decoration" du n° EDI
             string ediDir = Path.Combine(comboBoxSource.Text, numEDI);//path + num EDI == new path
             Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
@@ -139,6 +155,8 @@ namespace EdiVifExtract
 
 
             //le fichier des entetes
+            String Entete = "";
+
             System.IO.File.WriteAllText(Path.Combine(ediDir, "cde_ent.asc"), modifiedLines[0].ToString());
 
             String destFile = Path.Combine(ediDir, "cde_lig.asc");
@@ -318,6 +336,11 @@ namespace EdiVifExtract
             {
                 ajouterSourcelistCombo();
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
