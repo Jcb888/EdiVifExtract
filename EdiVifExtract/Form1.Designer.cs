@@ -39,6 +39,7 @@
             this.buttonSelectDepot = new System.Windows.Forms.Button();
             this.labelrepTravail = new System.Windows.Forms.Label();
             this.labelDepot = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +127,7 @@
             // labelrepTravail
             // 
             this.labelrepTravail.AutoSize = true;
-            this.labelrepTravail.Location = new System.Drawing.Point(19, 11);
+            this.labelrepTravail.Location = new System.Drawing.Point(20, 17);
             this.labelrepTravail.Name = "labelrepTravail";
             this.labelrepTravail.Size = new System.Drawing.Size(102, 13);
             this.labelrepTravail.TabIndex = 9;
@@ -141,11 +142,22 @@
             this.labelDepot.TabIndex = 10;
             this.labelDepot.Text = "Répertoire destination (dépot)";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(19, 110);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = ".55 => prod / .58 => test";
+            // 
             // FormExtract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 190);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDepot);
             this.Controls.Add(this.labelrepTravail);
             this.Controls.Add(this.buttonSelectDepot);
@@ -156,6 +168,7 @@
             this.Controls.Add(this.buttonGenerer);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "FormExtract";
@@ -180,6 +193,7 @@
         private System.Windows.Forms.Button buttonSelectDepot;
         private System.Windows.Forms.Label labelrepTravail;
         private System.Windows.Forms.Label labelDepot;
+        private System.Windows.Forms.Label label1;
     }
 }
 
