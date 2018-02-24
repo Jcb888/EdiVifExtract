@@ -39,7 +39,6 @@
             this.buttonSelectDepot = new System.Windows.Forms.Button();
             this.labelrepTravail = new System.Windows.Forms.Label();
             this.labelDepot = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.checkBoxChangerDate = new System.Windows.Forms.CheckBox();
             this.textBoxDateLivraison = new System.Windows.Forms.TextBox();
             this.textBoxDateEmission = new System.Windows.Forms.TextBox();
@@ -53,11 +52,11 @@
             // 
             // buttonGenerer
             // 
-            this.buttonGenerer.Location = new System.Drawing.Point(19, 272);
+            this.buttonGenerer.Location = new System.Drawing.Point(19, 264);
             this.buttonGenerer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonGenerer.Name = "buttonGenerer";
             this.buttonGenerer.Size = new System.Drawing.Size(86, 23);
-            this.buttonGenerer.TabIndex = 0;
+            this.buttonGenerer.TabIndex = 17;
             this.buttonGenerer.Text = "genererFichiers";
             this.buttonGenerer.UseVisualStyleBackColor = true;
             this.buttonGenerer.Click += new System.EventHandler(this.buttonGenerer_Click);
@@ -84,10 +83,10 @@
             // 
             // buttonOuvrirDest
             // 
-            this.buttonOuvrirDest.Location = new System.Drawing.Point(172, 272);
+            this.buttonOuvrirDest.Location = new System.Drawing.Point(172, 264);
             this.buttonOuvrirDest.Name = "buttonOuvrirDest";
             this.buttonOuvrirDest.Size = new System.Drawing.Size(104, 25);
-            this.buttonOuvrirDest.TabIndex = 5;
+            this.buttonOuvrirDest.TabIndex = 18;
             this.buttonOuvrirDest.Text = "OuvrirDestination";
             this.buttonOuvrirDest.UseVisualStyleBackColor = true;
             this.buttonOuvrirDest.Click += new System.EventHandler(this.buttonOuvrirDest_Click);
@@ -150,20 +149,10 @@
             this.labelDepot.TabIndex = 10;
             this.labelDepot.Text = "Répertoire destination (dépot)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 110);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = ".55 => prod / .58 => test";
-            // 
             // checkBoxChangerDate
             // 
             this.checkBoxChangerDate.AutoSize = true;
-            this.checkBoxChangerDate.Location = new System.Drawing.Point(20, 135);
+            this.checkBoxChangerDate.Location = new System.Drawing.Point(20, 127);
             this.checkBoxChangerDate.Name = "checkBoxChangerDate";
             this.checkBoxChangerDate.Size = new System.Drawing.Size(111, 17);
             this.checkBoxChangerDate.TabIndex = 12;
@@ -172,22 +161,22 @@
             // 
             // textBoxDateLivraison
             // 
-            this.textBoxDateLivraison.Location = new System.Drawing.Point(39, 159);
+            this.textBoxDateLivraison.Location = new System.Drawing.Point(39, 203);
             this.textBoxDateLivraison.Name = "textBoxDateLivraison";
             this.textBoxDateLivraison.Size = new System.Drawing.Size(100, 20);
-            this.textBoxDateLivraison.TabIndex = 13;
+            this.textBoxDateLivraison.TabIndex = 16;
             this.textBoxDateLivraison.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBoxDateEmission
             // 
-            this.textBoxDateEmission.Location = new System.Drawing.Point(39, 211);
+            this.textBoxDateEmission.Location = new System.Drawing.Point(39, 150);
             this.textBoxDateEmission.Name = "textBoxDateEmission";
             this.textBoxDateEmission.Size = new System.Drawing.Size(100, 20);
             this.textBoxDateEmission.TabIndex = 14;
             // 
             // textBoxDateReception
             // 
-            this.textBoxDateReception.Location = new System.Drawing.Point(39, 185);
+            this.textBoxDateReception.Location = new System.Drawing.Point(39, 177);
             this.textBoxDateReception.Name = "textBoxDateReception";
             this.textBoxDateReception.Size = new System.Drawing.Size(100, 20);
             this.textBoxDateReception.TabIndex = 15;
@@ -195,7 +184,7 @@
             // labelFormatDate
             // 
             this.labelFormatDate.AutoSize = true;
-            this.labelFormatDate.Location = new System.Drawing.Point(42, 243);
+            this.labelFormatDate.Location = new System.Drawing.Point(42, 235);
             this.labelFormatDate.Name = "labelFormatDate";
             this.labelFormatDate.Size = new System.Drawing.Size(63, 13);
             this.labelFormatDate.TabIndex = 16;
@@ -204,7 +193,7 @@
             // labelDatelivraison
             // 
             this.labelDatelivraison.AutoSize = true;
-            this.labelDatelivraison.Location = new System.Drawing.Point(145, 162);
+            this.labelDatelivraison.Location = new System.Drawing.Point(145, 206);
             this.labelDatelivraison.Name = "labelDatelivraison";
             this.labelDatelivraison.Size = new System.Drawing.Size(75, 13);
             this.labelDatelivraison.TabIndex = 17;
@@ -213,7 +202,7 @@
             // labelDateReception
             // 
             this.labelDateReception.AutoSize = true;
-            this.labelDateReception.Location = new System.Drawing.Point(145, 188);
+            this.labelDateReception.Location = new System.Drawing.Point(145, 180);
             this.labelDateReception.Name = "labelDateReception";
             this.labelDateReception.Size = new System.Drawing.Size(82, 13);
             this.labelDateReception.TabIndex = 18;
@@ -222,7 +211,7 @@
             // labelDateEmission
             // 
             this.labelDateEmission.AutoSize = true;
-            this.labelDateEmission.Location = new System.Drawing.Point(145, 211);
+            this.labelDateEmission.Location = new System.Drawing.Point(145, 150);
             this.labelDateEmission.Name = "labelDateEmission";
             this.labelDateEmission.Size = new System.Drawing.Size(77, 13);
             this.labelDateEmission.TabIndex = 19;
@@ -232,7 +221,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 314);
+            this.ClientSize = new System.Drawing.Size(338, 303);
             this.Controls.Add(this.labelDateEmission);
             this.Controls.Add(this.labelDateReception);
             this.Controls.Add(this.labelDatelivraison);
@@ -241,7 +230,6 @@
             this.Controls.Add(this.textBoxDateEmission);
             this.Controls.Add(this.textBoxDateLivraison);
             this.Controls.Add(this.checkBoxChangerDate);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelDepot);
             this.Controls.Add(this.labelrepTravail);
             this.Controls.Add(this.buttonSelectDepot);
@@ -277,7 +265,6 @@
         private System.Windows.Forms.Button buttonSelectDepot;
         private System.Windows.Forms.Label labelrepTravail;
         private System.Windows.Forms.Label labelDepot;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxChangerDate;
         private System.Windows.Forms.TextBox textBoxDateLivraison;
         private System.Windows.Forms.TextBox textBoxDateEmission;

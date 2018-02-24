@@ -9,3 +9,15 @@ C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\ob
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csproj.GenerateResource.Cache
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.exe
 C:\Users\jc\documents\visual studio 2017\Projects\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.pdb
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Release\EdiVifExtract.exe.config
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Release\EdiVifExtract.exe
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Release\EdiVifExtract.pdb
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Release\EdiFabric.Framework.dll
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\bin\Release\ExtendedXmlSerializer.dll
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csprojResolveAssemblyReference.cache
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.FormExtract.resources
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.Properties.Resources.resources
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csproj.GenerateResource.Cache
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csproj.CoreCompileInputs.cache
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.exe
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.pdb

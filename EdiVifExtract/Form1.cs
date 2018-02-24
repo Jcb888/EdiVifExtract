@@ -54,9 +54,9 @@ namespace EdiVifExtract
             {
                 co.ListSourceDirectory.Add(new comboItem("1",@"c:\temp"));
                 co.strSourceSelectionne = @"c:\temp";
-                co.listDepotDirectory.Add(new comboItem("1", @"\\192.168.181.55\ascii\edi\cde"));
-                co.listDepotDirectory.Add(new comboItem("2", @"\\192.168.181.58\ascii\edi\cde"));
-                co.strDepotSelectionne = @"\\192.168.181.58\ascii\edi\cde";
+                co.listDepotDirectory.Add(new comboItem("1", @"\\vifprod.sca.local.\ascii\edi\cde"));
+                co.listDepotDirectory.Add(new comboItem("2", @"\\viftest.sca.local.\ascii\edi\cde"));
+                co.strDepotSelectionne = @"\\viftest.sca.local.\ascii\edi\cde";
 
                 if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
                 {
@@ -270,7 +270,7 @@ namespace EdiVifExtract
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("@ Jean-Christophe BILLARD - 2017 "+"\n"+"     Version 0.1");
+            MessageBox.Show("@ JCSoft - 2018 "+"\n"+"     Version 1.2");
         }
 
         private void comboBoxDepot_KeyDown(object sender, KeyEventArgs e)
