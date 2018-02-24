@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
-using ExtendedXmlSerialization;
+//using ExtendedXmlSerialization;
 
 namespace EdiVifExtract
 {
@@ -20,13 +20,15 @@ namespace EdiVifExtract
         // Les variables globals au formulaire
         string appDataArterris = "";//c'est dans ce repertoire qu'on a les droits et qu'il convient d'écrire
         string appdata = "";//son ss rep.
-        String xml;
+        //String xml;
 
         //static List<FileInfo> listeFichiers = new List<FileInfo>();
 
 
-        Dictionary<string, string> DicdepotDirectory = new Dictionary<string,string>();
-        Dictionary<string, string> DicSourceDirectory = new Dictionary<string, string>();
+        //Dictionary<string, string> DicdepotDirectory = new Dictionary<string,string>();
+        //Dictionary<string, string> DicSourceDirectory = new Dictionary<string, string>();
+        //List<comboItem> comboListeSource = new List<comboItem>();
+        //List<comboItem> comboListeDest = new List<comboItem>();
         //Dictionary<string, string> DicdestinationDirectory = new Dictionary<string, string>();
         //class pour serialiser les params à mémoriser
         static configObject co = new configObject();
@@ -34,47 +36,48 @@ namespace EdiVifExtract
         public FormExtract()
         {
 
-            co.DicSourceDirectory = DicSourceDirectory;
-            //co.DicdestinationDirectory = DicdestinationDirectory;
-            co.DicdepotDirectory = DicdepotDirectory;
-
             InitializeComponent();
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
-            
+            XmlSerializer xs = new XmlSerializer(typeof(configObject));//pour serialiser en XML la config (sauvegarde des paths src et dst)
+            co.ListSourceDirectory = new List<comboItem>();
+            co.listDepotDirectory = new List<comboItem>();
+            co.strDepotSelectionne = "";
+            co.strSourceSelectionne = "";
 
             if (!Directory.Exists(appDataArterris))
                 Directory.CreateDirectory(appDataArterris);
 
            
-            ExtendedXmlSerializer xs = new ExtendedXmlSerializer();//pour serialiser en XML la config (sauvegarde des paths src et dst)
+            //ExtendedXmlSerializer xs = new ExtendedXmlSerializer();//pour serialiser en XML la config (sauvegarde des paths src et dst)
             if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
-                co.DicSourceDirectory.Add("1", @"c:\temp\");
-                //co.DicdestinationDirectory.Add("1", @"c:\1");
-                co.DicdepotDirectory.Add("1", @"\\srvvifprod1\ascii\edi\cde");
-                co.DicdepotDirectory.Add("2", @"\\192.168.181.58\ascii\edi\cde");
-                
+                co.ListSourceDirectory.Add(new comboItem("1",@"c:\temp"));
+                co.strSourceSelectionne = @"c:\temp";
+                co.listDepotDirectory.Add(new comboItem("1", @"\\192.168.181.55\ascii\edi\cde"));
+                co.listDepotDirectory.Add(new comboItem("2", @"\\192.168.181.58\ascii\edi\cde"));
+                co.strDepotSelectionne = @"\\192.168.181.58\ascii\edi\cde";
 
-                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
+                if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
                 {
-                  
-                    xml  = xs.Serialize(co);
-                    wr.WriteLine(xml);
+                    
+                    using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
+                    {
+                        xs.Serialize(wr, co);
+                    }
+
                 }
 
             }
 
             //init des txtbox avec les params enregistres dans le xml
+
             using (StreamReader rd = new StreamReader(appDataArterris + "\\configEDI.xml"))
             {
+                co = xs.Deserialize(rd) as configObject;
+                
+                //this.comboBoxSourcePath.Text = co.strSourcePath;
 
-                xml = rd.ReadToEnd();
-                co = xs.Deserialize<configObject>(xml);// as configObject;
-                //this.DicdestinationDirectory = co.DicdestinationDirectory;
-                this.DicSourceDirectory = co.DicSourceDirectory;
-                this.DicdepotDirectory = co.DicdepotDirectory;
-               
             }
 
             remplirCombo();
@@ -82,14 +85,13 @@ namespace EdiVifExtract
 
         public void remplirCombo()
         {
+            //comboListeSource = co.ListSourceDirectory;
+            //comboListeDest = co.listDepotDirectory;
 
-            comboBoxSource.DataSource = new BindingSource(DicSourceDirectory, null);
-            comboBoxSource.DisplayMember = "Value";
-            comboBoxSource.ValueMember = "Key";
-            comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
-            comboBoxDepot.DisplayMember = "Value";
-            comboBoxDepot.ValueMember = "key";
-
+            co.ListSourceDirectory.ForEach(i => comboBoxSource.Items.Add(i));
+            co.listDepotDirectory.ForEach(i => comboBoxDepot.Items.Add(i));
+            comboBoxSource.Text = co.strSourceSelectionne;
+            comboBoxDepot.Text = co.strDepotSelectionne;
 
         }
 
@@ -101,25 +103,69 @@ namespace EdiVifExtract
               return;
             }
             // recup de la liste des fichier .asc du repertoire de la combobox 
-            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, "*.asc");
+            string[] tabFiles = Directory.GetFileSystemEntries(comboBoxSource.Text, "*.asc");
+
+            if(tabFiles.Length < 1)
+            {
+                MessageBox.Show("Aucun fichier asc trouvé dans : " + comboBoxSource.Text);
+                return;
+            }
 
             for (int i = 0; i < tabFiles.Length; i++)
             {
                 traiterFichierEnCours(tabFiles[i]);
             }
             
-            string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
-            MessageBox.Show(value);
+            //string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
+            ////MessageBox.Show(value);
         }
 
         private void traiterFichierEnCours(String fichierASC)
         {
             string[] OriginaleLines = System.IO.File.ReadAllLines(fichierASC);
             string[] modifiedLines = new string[OriginaleLines.Length];
-            string[] StrSplit = OriginaleLines[0].Split('"');
-            String numEDI = StrSplit[5];// on recupere le n° EDI
+            //string[] StrSplit = OriginaleLines[0].Split('"');
+            string[] stringSeparators = new string[] { "\""+" "+"\"" };
+            string[] StrSplit = OriginaleLines[0].Split(stringSeparators, StringSplitOptions.None);
+            String numEDI = StrSplit[2];// on recupere le n° EDI
+            if (this.checkBoxChangerDate.Checked)
+            {
+                StrSplit[09] = this.textBoxDateEmission.Text; //dateEmission
+                StrSplit[10] = this.textBoxDateReception.Text;//dateReception
+                StrSplit[11] = this.textBoxDateLivraison.Text;//dateLivraison
+
+                //creation d'une nouvelle ligne d'en tete (1er ligne du fichier) par la meme avec les nouvelles dates
+                String newlineEntete = "";
+                for (int j = 0; j < StrSplit.Length; j++)
+                {
+                    if (j == StrSplit.Length-1 || j == 0) //si on est sur la 1er ligne ou la dernière
+                    {
+                        if (j == 0)// si on est sur la 1er ligne
+                        {
+                            newlineEntete = StrSplit[0] + '"'; // on ne rajoute pas d'espace
+                        }
+                        else//c'est le dernier
+                        {
+                            newlineEntete = newlineEntete + ' ' + '"' + StrSplit[j]; //on rajoute juste un espace
+                        }
+                        
+                    }
+                    else //toute sles autres lignes
+                    {
+                        newlineEntete = newlineEntete +' '+ '"'+StrSplit[j]+'"'; //
+                    }
+                   
+
+                }
+
+                OriginaleLines[0] = newlineEntete; // on remplace la ligne d'entete avec les dates original par la logne d'entete avec les nouvelles dates
+
+
+            }
+
+
             numEDI = numEDI.Trim(new Char[] { ' ', '"' });//suppression des "decoration" du n° EDI
-            string ediDir = Path.Combine(((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value, numEDI);//path + num EDI == new path
+            string ediDir = Path.Combine(comboBoxSource.Text, numEDI);//path + num EDI == new path
             Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
 
             int i = 0;
@@ -131,6 +177,8 @@ namespace EdiVifExtract
 
 
             //le fichier des entetes
+            String Entete = "";
+
             System.IO.File.WriteAllText(Path.Combine(ediDir, "cde_ent.asc"), modifiedLines[0].ToString());
 
             String destFile = Path.Combine(ediDir, "cde_lig.asc");
@@ -146,25 +194,38 @@ namespace EdiVifExtract
                 fs.Close();
                 fs.Dispose();
             }
+
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", comboBoxSource.Text);
+            }
+            catch (Exception e2)
+            {
+
+                MessageBox.Show(e2.StackTrace);
+            }
         }
 
 
         public void creatXML()
         {
 
+            if (co == null)//un min de verif qd mm
+                return;
+
             try
             {
-                //co.DicdestinationDirectory = this.DicdestinationDirectory;
-                co.DicSourceDirectory = this.DicSourceDirectory;
-                co.DicdepotDirectory = this.DicdepotDirectory;
-                ExtendedXmlSerializer xs = new ExtendedXmlSerializer();
+                //co.strSourcePath = this.comboBoxSourcePath.Text;
+                //co.strDestinationPath = this.comboBoxDestination.Text;
+                //co.strFileSourcePath = this.comboBoxSourceFile.Text;
 
+                XmlSerializer xs = new XmlSerializer(typeof(configObject));
                 using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
                 {
+                    xs.Serialize(wr, co);
+                }
 
-                    xml = xs.Serialize(co);
-                    wr.WriteLine(xml);
-                };
+                //MessageBox.Show("Enregitrement des paramétres bien effectué \n\r" + "Source: " + co.strSourcePath + "\n\r" + "Destination: " + co.strDestinationPath);
 
             }
             catch (Exception e)
@@ -177,6 +238,12 @@ namespace EdiVifExtract
 
         private void FormExtract_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //if (Directory.Exists(comboBoxDepot.Text))
+            //    co.strDepotSelectionne = comboBoxDepot.Text;
+
+            //if (Directory.Exists(comboBoxSource.Text))
+            //    co.strSourceSelectionne = comboBoxSource.Text;
+
             creatXML();
         }
 
@@ -224,13 +291,14 @@ namespace EdiVifExtract
                 return;
             }
 
-            bool b = DicdepotDirectory.Any(tr => tr.Value.Equals(comboBoxDepot.Text, StringComparison.CurrentCultureIgnoreCase));
+            bool b = co.listDepotDirectory.Any(tr => tr.myValue.Equals(comboBoxDepot.Text, StringComparison.CurrentCultureIgnoreCase));
             if (!b)
             {
-                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
-                DicdepotDirectory.Add(kvp.Key, kvp.Value);
-                comboBoxDepot.DataSource = new BindingSource(DicdepotDirectory, null);
-                comboBoxDepot.SelectedIndex = comboBoxDepot.FindStringExact(kvp.Value);
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.listDepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                co.listDepotDirectory.Add(ci);
+                comboBoxDepot.Items.Add(ci);
+                comboBoxDepot.SelectedIndex = comboBoxDepot.FindStringExact(ci.myValue);
             }
         }
 
@@ -241,17 +309,18 @@ namespace EdiVifExtract
         {
             if (!Directory.Exists(comboBoxSource.Text))
             {
-                MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxSource.Text);
+                MessageBox.Show("Ce repertoire est introuvable : " + comboBoxSource.Text);
                 return;
             }
-            //deja dans la liste ?
-            bool b = DicSourceDirectory.Any(tr => tr.Value.Equals(comboBoxSource.Text, StringComparison.CurrentCultureIgnoreCase));
-            if (!b)//si non on le rajoute
+
+            bool b = co.ListSourceDirectory.Any(tr => tr.myValue.Equals(comboBoxSource.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
             {
-                KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicSourceDirectory.Count) + 1).ToString(), comboBoxSource.Text);
-                DicSourceDirectory.Add(kvp.Key, kvp.Value);
-                comboBoxSource.DataSource = new BindingSource(DicSourceDirectory, null);
-                comboBoxSource.SelectedIndex = comboBoxSource.FindStringExact(kvp.Value);
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.ListSourceDirectory.Count) + 1).ToString(), comboBoxSource.Text);
+                co.ListSourceDirectory.Add(ci);
+                comboBoxSource.Items.Add(ci);
+                comboBoxSource.SelectedIndex = comboBoxSource.FindStringExact(ci.myValue);
             }
         }
 
@@ -290,22 +359,53 @@ namespace EdiVifExtract
                 ajouterSourcelistCombo();
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class configObject
     {
+
         public configObject()
         {
 
-            //DicdestinationDirectory = new Dictionary<string, string>();//
-            //DicSourceDirectory = new Dictionary<string, string>();
-            //DicdepotDirectory = new Dictionary<string, string>();
-
         }
 
-        public Dictionary<string, string> DicSourceDirectory;
-        //public Dictionary<string, string> DicdestinationDirectory;
-        public Dictionary<string, string> DicdepotDirectory;
+        public String strSourceSelectionne;
+        public String strDepotSelectionne;
+        public List<comboItem> ListSourceDirectory;
+        public List<comboItem> listDepotDirectory;
     }
+
+    [Serializable]
+    public class comboItem
+    {
+        public comboItem()
+        {
+         
+        }
+
+        public comboItem(string k, string v)
+        {
+            myKey = k;
+            myValue = v;
+        }
+
+        [XmlElement("StringElementKey")]
+        public String myKey { get; set; }
+
+        [XmlElement("StringElementValue")]
+        public String myValue { get; set; }
+
+        public override string ToString()
+        {
+            return myValue;
+        }
+
+    }
+
 
 }
