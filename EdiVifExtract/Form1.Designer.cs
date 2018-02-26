@@ -206,16 +206,16 @@
             this.labelDateReception.Name = "labelDateReception";
             this.labelDateReception.Size = new System.Drawing.Size(82, 13);
             this.labelDateReception.TabIndex = 18;
-            this.labelDateReception.Text = "Date Reception";
+            this.labelDateReception.Text = "Date Expedition";
             // 
             // labelDateEmission
             // 
             this.labelDateEmission.AutoSize = true;
             this.labelDateEmission.Location = new System.Drawing.Point(145, 150);
             this.labelDateEmission.Name = "labelDateEmission";
-            this.labelDateEmission.Size = new System.Drawing.Size(77, 13);
+            this.labelDateEmission.Size = new System.Drawing.Size(86, 13);
             this.labelDateEmission.TabIndex = 19;
-            this.labelDateEmission.Text = "Date Emission ";
+            this.labelDateEmission.Text = "Date Commande";
             // 
             // FormExtract
             // 
