@@ -276,7 +276,7 @@ namespace EdiVifExtract
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("@ JCSoft - 2018 "+"\n"+"     Version 1.2");
+            MessageBox.Show("@ JCSoft - 2018 "+"\n"+"     Version 1.3");
         }
 
         private void comboBoxDepot_KeyDown(object sender, KeyEventArgs e)
