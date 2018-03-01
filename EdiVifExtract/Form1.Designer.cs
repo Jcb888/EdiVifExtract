@@ -47,15 +47,18 @@
             this.labelDatelivraison = new System.Windows.Forms.Label();
             this.labelDateReception = new System.Windows.Forms.Label();
             this.labelDateEmission = new System.Windows.Forms.Label();
+            this.checkBoxChangeNumEDI = new System.Windows.Forms.CheckBox();
+            this.textBoxNouveauNumEDI = new System.Windows.Forms.TextBox();
+            this.labelNouveauNumEDI = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonGenerer
             // 
-            this.buttonGenerer.Location = new System.Drawing.Point(19, 264);
+            this.buttonGenerer.Location = new System.Drawing.Point(20, 309);
             this.buttonGenerer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonGenerer.Name = "buttonGenerer";
-            this.buttonGenerer.Size = new System.Drawing.Size(86, 23);
+            this.buttonGenerer.Size = new System.Drawing.Size(86, 25);
             this.buttonGenerer.TabIndex = 17;
             this.buttonGenerer.Text = "genererFichiers";
             this.buttonGenerer.UseVisualStyleBackColor = true;
@@ -83,7 +86,7 @@
             // 
             // buttonOuvrirDest
             // 
-            this.buttonOuvrirDest.Location = new System.Drawing.Point(172, 264);
+            this.buttonOuvrirDest.Location = new System.Drawing.Point(169, 309);
             this.buttonOuvrirDest.Name = "buttonOuvrirDest";
             this.buttonOuvrirDest.Size = new System.Drawing.Size(104, 25);
             this.buttonOuvrirDest.TabIndex = 18;
@@ -184,7 +187,7 @@
             // labelFormatDate
             // 
             this.labelFormatDate.AutoSize = true;
-            this.labelFormatDate.Location = new System.Drawing.Point(42, 235);
+            this.labelFormatDate.Location = new System.Drawing.Point(36, 226);
             this.labelFormatDate.Name = "labelFormatDate";
             this.labelFormatDate.Size = new System.Drawing.Size(63, 13);
             this.labelFormatDate.TabIndex = 16;
@@ -217,11 +220,40 @@
             this.labelDateEmission.TabIndex = 19;
             this.labelDateEmission.Text = "Date Commande";
             // 
+            // checkBoxChangeNumEDI
+            // 
+            this.checkBoxChangeNumEDI.AutoSize = true;
+            this.checkBoxChangeNumEDI.Location = new System.Drawing.Point(13, 250);
+            this.checkBoxChangeNumEDI.Name = "checkBoxChangeNumEDI";
+            this.checkBoxChangeNumEDI.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxChangeNumEDI.TabIndex = 20;
+            this.checkBoxChangeNumEDI.Text = "Changer le numéro EDI";
+            this.checkBoxChangeNumEDI.UseVisualStyleBackColor = true;
+            // 
+            // textBoxNouveauNumEDI
+            // 
+            this.textBoxNouveauNumEDI.Location = new System.Drawing.Point(39, 273);
+            this.textBoxNouveauNumEDI.Name = "textBoxNouveauNumEDI";
+            this.textBoxNouveauNumEDI.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNouveauNumEDI.TabIndex = 21;
+            // 
+            // labelNouveauNumEDI
+            // 
+            this.labelNouveauNumEDI.AutoSize = true;
+            this.labelNouveauNumEDI.Location = new System.Drawing.Point(145, 276);
+            this.labelNouveauNumEDI.Name = "labelNouveauNumEDI";
+            this.labelNouveauNumEDI.Size = new System.Drawing.Size(110, 13);
+            this.labelNouveauNumEDI.TabIndex = 22;
+            this.labelNouveauNumEDI.Text = "Nouveau numéro EDI";
+            // 
             // FormExtract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 303);
+            this.ClientSize = new System.Drawing.Size(338, 354);
+            this.Controls.Add(this.labelNouveauNumEDI);
+            this.Controls.Add(this.textBoxNouveauNumEDI);
+            this.Controls.Add(this.checkBoxChangeNumEDI);
             this.Controls.Add(this.labelDateEmission);
             this.Controls.Add(this.labelDateReception);
             this.Controls.Add(this.labelDatelivraison);
@@ -273,6 +305,9 @@
         private System.Windows.Forms.Label labelDatelivraison;
         private System.Windows.Forms.Label labelDateReception;
         private System.Windows.Forms.Label labelDateEmission;
+        private System.Windows.Forms.CheckBox checkBoxChangeNumEDI;
+        private System.Windows.Forms.TextBox textBoxNouveauNumEDI;
+        private System.Windows.Forms.Label labelNouveauNumEDI;
     }
 }
 

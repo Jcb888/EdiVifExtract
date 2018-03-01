@@ -115,9 +115,16 @@ namespace EdiVifExtract
             {
                 traiterFichierEnCours(tabFiles[i]);
             }
-            
-            //string value = ((KeyValuePair<string, string>)comboBoxSource.SelectedItem).Value;
-            ////MessageBox.Show(value);
+
+            try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", comboBoxSource.Text);
+            }
+            catch (Exception e2)
+            {
+
+                MessageBox.Show(e2.StackTrace);
+            }
         }
 
         private void traiterFichierEnCours(String fichierASC)
@@ -158,23 +165,35 @@ namespace EdiVifExtract
 
                 }
 
-                OriginaleLines[0] = newlineEntete; // on remplace la ligne d'entete avec les dates original par la logne d'entete avec les nouvelles dates
+                OriginaleLines[0] = newlineEntete; // on remplace la ligne d'entete avec les dates original par la ligne d'entete avec les nouvelles dates
 
 
             }
 
 
             numEDI = numEDI.Trim(new Char[] { ' ', '"' });//suppression des "decoration" du n° EDI
-            string ediDir = Path.Combine(comboBoxSource.Text, numEDI);//path + num EDI == new path
-            Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
+            
 
             int i = 0;
             foreach (string line in OriginaleLines)
             {
                 modifiedLines[i++] = line.Remove(0, 3);
                 modifiedLines[i - 1] += Environment.NewLine;
+                
             }
 
+            if (this.checkBoxChangeNumEDI.Checked)
+            {
+                for (int j = 0; j < modifiedLines.Length; j++)
+                {
+                    modifiedLines[j] = modifiedLines[j].Replace(numEDI, textBoxNouveauNumEDI.Text);
+                }
+                numEDI = textBoxNouveauNumEDI.Text;
+            }
+
+            //creation du path et du repertoire pour placer les fcihiers
+            string ediDir = Path.Combine(comboBoxSource.Text, numEDI);//path + num EDI == new path
+            Directory.CreateDirectory(ediDir);//creation repertoire au nom du n° EDI
 
             //le fichier des entetes
             String Entete = "";
@@ -195,15 +214,7 @@ namespace EdiVifExtract
                 fs.Dispose();
             }
 
-            try
-            {
-                System.Diagnostics.Process.Start("explorer.exe", comboBoxSource.Text);
-            }
-            catch (Exception e2)
-            {
-
-                MessageBox.Show(e2.StackTrace);
-            }
+            
         }
 
 
