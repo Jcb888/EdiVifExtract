@@ -20,16 +20,7 @@ namespace EdiVifExtract
         // Les variables globals au formulaire
         string appDataArterris = "";//c'est dans ce repertoire qu'on a les droits et qu'il convient d'écrire
         string appdata = "";//son ss rep.
-        //String xml;
-
-        //static List<FileInfo> listeFichiers = new List<FileInfo>();
-
-
-        //Dictionary<string, string> DicdepotDirectory = new Dictionary<string,string>();
-        //Dictionary<string, string> DicSourceDirectory = new Dictionary<string, string>();
-        //List<comboItem> comboListeSource = new List<comboItem>();
-        //List<comboItem> comboListeDest = new List<comboItem>();
-        //Dictionary<string, string> DicdestinationDirectory = new Dictionary<string, string>();
+       
         //class pour serialiser les params à mémoriser
         static configObject co = new configObject();
 
@@ -49,8 +40,7 @@ namespace EdiVifExtract
                 Directory.CreateDirectory(appDataArterris);
 
            
-            //ExtendedXmlSerializer xs = new ExtendedXmlSerializer();//pour serialiser en XML la config (sauvegarde des paths src et dst)
-            if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
+            if (!File.Exists(appDataArterris + "\\configEDIv2.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
                 co.ListSourceDirectory.Add(new comboItem("1",@"c:\temp"));
                 co.strSourceSelectionne = @"c:\temp";
@@ -58,27 +48,32 @@ namespace EdiVifExtract
                 co.listDepotDirectory.Add(new comboItem("2", @"\\viftest.sca.local.\ascii\edi\cde"));
                 co.strDepotSelectionne = @"\\viftest.sca.local.\ascii\edi\cde";
 
-                if (!File.Exists(appDataArterris + "\\configEDI.xml"))//si le fichier n'existe pas on le cré avec init à "";
-                {
+                //if (!File.Exists(appDataArterris + "\\configEDIv2.xml"))
+                //{
                     
-                    using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
+                    using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDIv2.xml"))
                     {
-                        xs.Serialize(wr, co);
+                        xs.Serialize(wr, co);//On sérialise;
                     }
 
-                }
+                //}
 
             }
 
             //init des txtbox avec les params enregistres dans le xml
 
-            using (StreamReader rd = new StreamReader(appDataArterris + "\\configEDI.xml"))
+            using (StreamReader rd = new StreamReader(appDataArterris + "\\configEDIv2.xml"))
             {
                 co = xs.Deserialize(rd) as configObject;
                 
                 //this.comboBoxSourcePath.Text = co.strSourcePath;
 
             }
+
+            //verif si la deserialisation s'est bien faite
+            if (co.strSourceSelectionne is null)
+                MessageBox.Show("deserialisation du fichier de config echoue");
+
 
             remplirCombo();
         }
@@ -231,7 +226,7 @@ namespace EdiVifExtract
                 //co.strFileSourcePath = this.comboBoxSourceFile.Text;
 
                 XmlSerializer xs = new XmlSerializer(typeof(configObject));
-                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDI.xml"))
+                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configEDIv2.xml"))
                 {
                     xs.Serialize(wr, co);
                 }
