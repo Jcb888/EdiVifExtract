@@ -33,3 +33,4 @@ C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csp
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.exe
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.pdb
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csprojResolveAssemblyReference.cache
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Debug\EdiVifExtract.csproj.CopyComplete

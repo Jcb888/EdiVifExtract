@@ -21,3 +21,4 @@ C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.c
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csproj.CoreCompileInputs.cache
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.exe
 C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.pdb
+C:\Users\jc\Source\Repos\EdiVifExtract\EdiVifExtract\obj\Release\EdiVifExtract.csproj.CopyComplete
